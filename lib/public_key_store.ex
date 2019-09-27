@@ -13,9 +13,10 @@ defmodule FirebaseJwt.PublicKeyStore do
 
   def fetch_firebase_keys() do
     response = HTTPoison.get!(@googleCertificateUrl)
-    expire = Timex.parse!(response.headers |> Map.new() |> Map.get("expires"), "{RFC1123}")
+    {_, expire} = Enum.find(response.headers, fn {k, _} -> String.downcase(k) == "expires" end)
+
     store(:public_keys, Jason.decode!(response.body))
-    store(:expire, expire)
+    store(:expire, Timex.parse!(expire, "{RFC1123}"))
   end
 
   def store(key, value) do
