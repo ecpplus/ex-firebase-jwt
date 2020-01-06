@@ -10,7 +10,7 @@
   "idna": {:hex, :idna, "6.0.0", "689c46cbcdf3524c44d5f3dde8001f364cd7608a99556d8fbd8239a5798d4c10", [:rebar3], [{:unicode_util_compat, "0.4.1", [hex: :unicode_util_compat, repo: "hexpm", optional: false]}], "hexpm"},
   "jason": {:hex, :jason, "1.1.2", "b03dedea67a99223a2eaf9f1264ce37154564de899fd3d8b9a21b1a6fd64afe7", [:mix], [{:decimal, "~> 1.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm"},
   "joken": {:hex, :joken, "2.0.1", "ec9ab31bf660f343380da033b3316855197c8d4c6ef597fa3fcb451b326beb14", [:mix], [{:jose, "~> 1.9", [hex: :jose, repo: "hexpm", optional: false]}], "hexpm"},
-  "jose": {:hex, :jose, "1.9.0", "4167c5f6d06ffaebffd15cdb8da61a108445ef5e85ab8f5a7ad926fdf3ada154", [:mix, :rebar3], [{:base64url, "~> 0.0.1", [hex: :base64url, repo: "hexpm", optional: false]}], "hexpm"},
+  "jose": {:hex, :jose, "1.10.0", "0bc2645b50c50e4a4714a593093b3ec091dddbdb7b369c3a8c7eab9998bd378f", [:mix, :rebar3], [], "hexpm"},
   "keccakf1600": {:hex, :keccakf1600, "0.0.1", "c9f1f4abfc54c41c5abff5116c705bdfee63b21831008f361f00b70a10bf4c38", [:rebar3], [], "hexpm"},
   "libdecaf": {:hex, :libdecaf, "0.0.4", "c1caa4c4aaea356f89372debd0a672251111c2b2236e1b1e8a0f5bc271b60af4", [:rebar3], [], "hexpm"},
   "libsodium": {:hex, :libsodium, "0.0.10", "24584e6f5a60aed53542054c15fb31719bbf2d811d9a84f626734faf64d41304", [:rebar3], [], "hexpm"},
