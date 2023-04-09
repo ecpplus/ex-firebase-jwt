@@ -4,8 +4,6 @@ defmodule FirebaseJwt.App do
   use Application
 
   def start(_type, _args) do
-    #import Supervisor.Spec
-
     children = [
       FirebaseJwt.PublicKeyStore,
       FirebaseJwt.PublicKeyUpdater,
