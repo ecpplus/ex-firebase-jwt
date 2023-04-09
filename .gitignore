@@ -25,3 +25,6 @@ firebase_jwt-*.tar
 /.elixir_ls
 
 /example_jwt.txt
+
+.envrc
+.tool-versions

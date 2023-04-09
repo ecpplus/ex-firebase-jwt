@@ -2,8 +2,9 @@ defmodule FirebaseJwt.PublicKeyStore do
   @googleCertificateUrl "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com"
 
   use GenServer
+  require Logger
 
-  def start_link do
+  def start_link([]) do
     GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end
 
@@ -17,6 +18,7 @@ defmodule FirebaseJwt.PublicKeyStore do
 
     store(:public_keys, Jason.decode!(response.body))
     store(:expire, Timex.parse!(expire, "{RFC1123}"))
+    Logger.debug("#{__MODULE__} public keys updated.")
   end
 
   def store(key, value) do

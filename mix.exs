@@ -4,8 +4,8 @@ defmodule FirebaseJwt.MixProject do
   def project do
     [
       app: :firebase_jwt,
-      version: "0.1.0",
-      elixir: "~> 1.8",
+      version: "0.2.0",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package(),
@@ -26,10 +26,10 @@ defmodule FirebaseJwt.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:jose, "~> 1.9"},
-      {:jason, "~> 1.1"},
-      {:httpoison, "~> 1.4"},
-      {:timex, "~> 3.5"},
+      {:jose, "~> 1.11"},
+      {:jason, "~> 1.4"},
+      {:httpoison, "~> 2.1"},
+      {:timex, "~> 3.7"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
