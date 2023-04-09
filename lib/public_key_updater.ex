@@ -1,10 +1,10 @@
 defmodule FirebaseJwt.PublicKeyUpdater do
   use Task, restart: :permanent
-
+  require Logger
   alias FirebaseJwt.PublicKeyStore
   # @fetch_interval 300_000
 
-  def start_link do
+  def start_link([]) do
     Task.start_link(__MODULE__, :run, [])
   end
 
@@ -15,6 +15,7 @@ defmodule FirebaseJwt.PublicKeyUpdater do
   def run() do
     # Allow endless restart
     :timer.sleep(1000)
+    Logger.debug("[#{__MODULE__}] runs.")
 
     PublicKeyStore.fetch_firebase_keys()
     expire = PublicKeyStore.get(:expire) |> DateTime.to_unix(:millisecond)
