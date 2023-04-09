@@ -27,3 +27,4 @@ firebase_jwt-*.tar
 /example_jwt.txt
 
 .envrc
+.tool-versions
