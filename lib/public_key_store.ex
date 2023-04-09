@@ -13,20 +13,11 @@ defmodule FirebaseJwt.PublicKeyStore do
   end
 
   def fetch_firebase_keys() do
-    with {:ok, response = %HTTPoison.Response{status_code: 200}} <- HTTPoison.get(@googleCertificateUrl),
-      {_, expires_string} <- Enum.find(response.headers, fn {key, _} -> String.match?(key, ~r/\Aexpires\z/i) end),
-      {:ok, expire} <- Timex.parse(expires_string, "{RFC1123}") do
-        store(:public_keys, Jason.decode!(response.body))
-        store(:expire, expire)
-        Logger.debug("#{__MODULE__} stored public_keys of Firebase.")
+    response = HTTPoison.get!(@googleCertificateUrl)
+    {_, expire} = Enum.find(response.headers, fn {k, _} -> String.downcase(k) == "expires" end)
 
-    else
-      {:ok, response = %HTTPoison.Response{}} ->
-        Logger.debug("Error fetching public keys: #{inspect(response)}")
-
-      {:error, error} ->
-        Logger.debug("Error fetching public keys: #{inspect(error)}")
-    end
+    store(:public_keys, Jason.decode!(response.body))
+    store(:expire, Timex.parse!(expire, "{RFC1123}"))
   end
 
   def store(key, value) do
