@@ -18,6 +18,7 @@ defmodule FirebaseJwt.PublicKeyStore do
 
     store(:public_keys, Jason.decode!(response.body))
     store(:expire, Timex.parse!(expire, "{RFC1123}"))
+    Logger.debug("#{__MODULE__} public keys updated.")
   end
 
   def store(key, value) do
