@@ -15,7 +15,7 @@ defmodule FirebaseJwt.PublicKeyUpdater do
   def run() do
     # Allow endless restart
     :timer.sleep(1000)
-    Logger.debug("[#{__MODULE__}] runs.")
+    Application.get_env(:firebase_jwt, :debug_log) && Logger.debug("[#{__MODULE__}] runs.")
 
     PublicKeyStore.fetch_firebase_keys()
     expire = PublicKeyStore.get(:expire) |> DateTime.to_unix(:millisecond)
