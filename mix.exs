@@ -4,7 +4,7 @@ defmodule FirebaseJwt.MixProject do
   def project do
     [
       app: :firebase_jwt,
-      version: "0.2.0",
+      version: "0.2.1",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),

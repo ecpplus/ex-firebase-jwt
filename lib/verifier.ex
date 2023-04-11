@@ -9,6 +9,22 @@ defmodule FirebaseJwt.Verifier do
   alias JOSE.{JWK, JWT}
 
   def verify(token) do
+    case Application.get_env(:firebase_jwt, :simulator_mode) do
+      true -> verify_without_signing(token)
+      _ -> verify_with_signing(token)
+    end
+  end
+
+  defp verify_without_signing(token) do
+    with {:ok, payload} <- token |> String.split(".") |> Enum.at(1) |> Base.decode64(padding: false),
+         {:ok, json} <- Jason.decode(payload) do
+      {:ok, json}
+    else
+      _ -> {:error, :invalid_token}
+    end
+  end
+
+  defp verify_with_signing(token) do
     case(pem(token)) do
       nil ->
         {:error, :unknown_public_key}
