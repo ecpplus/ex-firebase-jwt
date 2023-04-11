@@ -1,0 +1,42 @@
+version: 2.1
+
+executors:
+  elixir:
+    docker:
+      - image: cimg/elixir:1.14.3
+        environment:
+          MIX_ENV: test
+jobs:
+  test:
+    executor: elixir
+    working_directory: ~/project
+    steps:
+      - checkout:
+          path: ~/project
+      - attach_workspace:
+          at: ~/project
+
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
+
+      - restore_cache: # restores saved mix cache
+          keys:
+            - v1-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+            - v1-cache-{{ .Branch }}
+            - v1-cache
+
+      - run: mix do deps.get, compile # get updated dependencies & compile them
+
+      - save_cache:
+          key: v1-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+          paths:
+            - "deps"
+            - "_build"
+
+      - run: mix test
+
+workflows:
+  version: 2
+  multiple-test:
+    jobs:
+      - test
